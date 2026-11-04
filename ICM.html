@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Pop - ICM</title>
+    <style>
+        :root {
+            --primary-blue: #004b87;
+            --alert-red: #dc3545;
+            --alert-red-bg: #f8d7da;
+            --warning-yellow: #ffc107;
+            --warning-yellow-bg: #fff3cd;
+            --info-blue: #17a2b8;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --bg-light: #f4f7f6;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .screen-pop {
+            background: #ffffff;
+            width: 100%;
+            max-width: 850px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge {
+            background-color: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .patient-banner {
+            background-color: #f8f9fa;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .patient-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            grid-column: span 3;
+            margin-bottom: 5px;
+        }
+
+        .info-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .alert-section {
+            background-color: var(--alert-red-bg);
+            border-left: 5px solid var(--alert-red);
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .alert-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.95rem;
+            color: #721c24;
+        }
+
+        .alert-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 12px;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .badge-danger { background-color: var(--alert-red); }
+        .badge-warning { background-color: var(--warning-yellow); color: var(--text-dark); }
+        .badge-info { background-color: var(--info-blue); }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            color: var(--primary-blue);
+            margin: 0 0 16px 0;
+            font-weight: 600;
+            border-bottom: 1px solid var(--bg-light);
+            padding-bottom: 8px;
+        }
+
+        .detail-row {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .detail-row strong {
+            color: var(--text-muted);
+            display: inline-block;
+            width: 120px;
+        }
+
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .vital-box {
+            background-color: var(--bg-light);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .vital-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .vital-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen-pop">
+        <!-- En-tête -->
+        <div class="header">
+            <h1>INSTITUT DE CARDIOLOGIE DE MONTRÉAL — Triage & Admission</h1>
+            <span class="status-badge">Nouveau — Arrivé</span>
+        </div>
+
+        <!-- Bannière Patient -->
+        <div class="patient-banner">
+            <div class="patient-name">TREMBLAY, Jean-Marc</div>
+            
+            <div class="info-group">
+                <span class="info-label">Âge / Naissance</span>
+                <span class="info-value">68 ans (14-05-1958) • M</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Numéro RAMQ</span>
+                <span class="info-value">TREM 5805 1412 (Exp: 28-05)</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Dossier ICM</span>
+                <span class="info-value">#894-3201 (Langue: FR)</span>
+            </div>
+            <div class="info-group" style="grid-column: span 3;">
+                <span class="info-label">Contact d'urgence</span>
+                <span class="info-value">Hélène Tremblay (Épouse) — (514) 555-0189</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Alertes Cliniques -->
+            <div class="alert-section">
+                <div class="alert-item">
+                    <span class="badge badge-danger">ALLERGIE</span>
+                    <strong>Produit de contraste iodé</strong>&nbsp;— Sévère (Prémédication requise avant coronarographie)
+                </div>
+                <div class="alert-item">
+                    <span class="badge badge-danger">MÉDICATION</span>
+                    <strong>Apixaban (Eliquis) 5 mg</strong>&nbsp;— Dernière dose prise : ce matin à 07h00
+                </div>
+                <div class="alert-item" style="color: #664d03; margin-top: 12px;">
+                    <span class="badge badge-warning">DISPOSITIF</span>
+                    Porteur d'un stimulateur cardiaque (Medtronic DDDR - Implantation 2021)
+                </div>
+            </div>
+
+            <!-- Détails et Signes Vitaux -->
+            <div class="grid-2">
+                <!-- Détails de l'admission -->
+                <div class="card">
+                    <h2 class="card-title">Détails du transfert</h2>
+                    <div class="detail-row">
+                        <strong>Provenance :</strong> Hôpital de Saint-Jérôme (RUISSS)
+                    </div>
+                    <div class="detail-row">
+                        <strong>Motif :</strong> Infarctus (NSTEMI)
+                    </div>
+                    <div class="detail-row">
+                        <strong>Destination :</strong> Lab. d'hémodynamie ➔ USIC
+                    </div>
+                    <div class="detail-row">
+                        <strong>Médecin assigné :</strong> Dre M. Lévesque
+                    </div>
+                    <div class="detail-row">
+                        <strong>Heure d'arrivée :</strong> Aujourd'hui, 08h42
+                    </div>
+                </div>
+
+                <!-- Constantes / Signes vitaux -->
+                <div class="card">
+                    <h2 class="card-title">Constantes d'accueil</h2>
+                    <div class="vitals-grid">
+                        <div class="vital-box">
+                            <span class="vital-label">PA (mmHg)</span>
+                            <span class="vital-value">148/88</span>
+                        </div>
+                        <div class="vital-box">
+                            <span class="vital-label">FC (bpm)</span>
+                            <span class="vital-value">82</span>
+                        </div>
+                        <div class="vital-box">
+                            <span class="vital-label">SpO2 (%)</span>
+                            <span class="vital-value">97%</span>
+                        </div>
+                        <div class="vital-box">
+                            <span class="vital-label">Douleur</span>
+                            <span class="vital-value">2/10</span>
+                        </div>
+                    </div>
+                    <div class="detail-row" style="margin-top: 15px;">
+                        <strong>Niveau de soins :</strong> Niveau 1 (RCR Complet)
+                    </div>
+                    <div class="detail-row">
+                        <strong>Isolement :</strong> Aucun
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
